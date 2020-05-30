@@ -5,39 +5,23 @@ const express = require('express')
 const publicPath = path.join(__dirname, '../public')
 const app = express()
 
+app.set('view engine', 'hbs')
 
 app.use(express.static(publicPath));
 
-
-
 app.get('', (req, res) => {
-    res.send('<h1>Hello Express</h1>')
-})
-
-app.get('/about', (req, res) => {
-    res.send({
-        name : 'Lokendra',
-        age: 24
+    res.render('index', {
+        name: 'Lokendra Dangi',
+        title: 'I am Home Page'
     })
 })
 
-app.get('/user', (req, res) => {
-    res.send([
-        {
-            name : 'Kapendra',
-            age: 34
-        },
-        {
-            name : 'Lalit',
-            age: 23
-        }
-    ])
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About Page',
+        course: 'express Course'
+    })
 })
-
-app.get('/admin', (req, res) => {
-    res.send('Admin page')
-})
-
 app.listen(3000, () => {
     console.log('Server is started')
 })
